@@ -1,0 +1,19 @@
+{
+  "name": "im-coding",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "im-coding": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js server",
+    "server": "node src/cli.js server",
+    "feishu:events": "node src/cli.js feishu-events",
+    "dev:feishu": "node src/cli.js dev",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
