@@ -601,40 +601,31 @@ CREATE TABLE runs (
 
 ## 10. 配置
 
-配置文件路径：
+配置入口：
 
 ```text
-~/.im-coding/config.yaml
+.env
 ```
 
 示例：
 
-```yaml
-server:
-  host: 127.0.0.1
-  port: 4399
-  hookTokenEnv: IM_CODING_HOOK_TOKEN
+```env
+IM_CODING_HOST=127.0.0.1
+IM_CODING_PORT=4399
+IM_CODING_STORE_PATH=~/.im-coding/im-coding.db
 
-store:
-  type: sqlite
-  path: ~/.im-coding/im-coding.db
+FEISHU_ENABLED=true
+FEISHU_APP_ID=cli_xxx
+FEISHU_APP_SECRET=xxx
+FEISHU_VERIFICATION_TOKEN=
+FEISHU_ENCRYPT_KEY=
 
-feishu:
-  enabled: true
-  appIdEnv: FEISHU_APP_ID
-  appSecretEnv: FEISHU_APP_SECRET
-  verificationTokenEnv: FEISHU_VERIFICATION_TOKEN
-  encryptKeyEnv: FEISHU_ENCRYPT_KEY
+IM_CODING_PROJECT_ID=im-coding
+IM_CODING_PROJECT_NAME=im-coding
+IM_CODING_PROJECT_ROOT=/Users/smzdm/project/work/im-coding
+IM_CODING_PROJECT_TOOL=codex
 
-projects:
-  - id: im-coding
-    name: im-coding
-    rootPath: /Users/smzdm/project/work/im-coding
-    codingTool: codex
-
-access:
-  allowedFeishuUsers:
-    - "<open_id_or_user_id>"
+IM_CODING_ALLOWED_FEISHU_USERS=ou_xxx,ou_yyy
 ```
 
 ## 11. 错误处理
@@ -645,7 +636,7 @@ access:
 
 ```text
 你还没有被授权使用 im-coding。
-请联系管理员把你的飞书 user id 加入 allowedFeishuUsers。
+请联系管理员把你的飞书 open_id 加入 IM_CODING_ALLOWED_FEISHU_USERS。
 ```
 
 ### 11.2 未选择项目
@@ -698,7 +689,7 @@ Codex 暂时不可用。
 
 - 初始化运行时项目。
 - 提供 `im-coding server` 命令。
-- 读取 config。
+- 读取 `.env`。
 - 提供 `GET /health`。
 
 验收：
@@ -715,7 +706,7 @@ Codex 暂时不可用。
 验收：
 
 - 启动时自动创建数据库。
-- 可从 config seed projects。
+- 可从 env seed projects。
 
 ### Task 3：Command Router
 

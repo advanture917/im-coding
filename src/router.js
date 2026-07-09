@@ -34,7 +34,7 @@ export class CommandRouter {
       return ["Phase 1 只支持飞书私聊。"];
     }
     if (!isAllowed(this.config, event.senderId)) {
-      return ["你还没有被授权使用 im-coding。\n请联系管理员把你的飞书 user id 加入 allowedFeishuUsers。"];
+      return ["你还没有被授权使用 im-coding。\n请联系管理员把你的飞书 open_id 加入 IM_CODING_ALLOWED_FEISHU_USERS。"];
     }
 
     this.store.ensureBinding({

@@ -124,7 +124,7 @@ lark-cli event consume im.message.receive_v1 --as bot
 - `chat_type = p2p` 映射为内部 `chatType = private`。
 - Phase 1.5 只接受 `chat_type = p2p`。
 - Phase 1.5 只接受 `message_type = text`，非文本先回复不支持或静默记录。
-- `sender_id` 是 open_id，可用于当前 `allowedFeishuUsers` 白名单。
+- `sender_id` 是 open_id，可用于当前 `IM_CODING_ALLOWED_FEISHU_USERS` 白名单。
 - `event_id` 是全局事件 ID，用于 `events(source='feishu_event_consumer')` 去重。
 
 ## 5. 新增运行方式
@@ -165,10 +165,16 @@ npm run feishu:events
 http://127.0.0.1:4399/internal/feishu/events
 ```
 
-可通过环境变量覆盖：
+可通过 `.env` 环境变量覆盖：
+
+```env
+IM_CODING_BRIDGE_URL=http://127.0.0.1:4399
+```
+
+然后使用简单命令启动：
 
 ```bash
-IM_CODING_BRIDGE_URL=http://127.0.0.1:4399 npm run feishu:events
+npm run feishu:events
 ```
 
 ## 6. 新增 HTTP API
@@ -349,10 +355,8 @@ im.message.receive_v1
 
 当前 router 已支持：
 
-```yaml
-access:
-  allowedFeishuUsers:
-    - "<open_id>"
+```env
+IM_CODING_ALLOWED_FEISHU_USERS=ou_xxx,ou_yyy
 ```
 
 开发阶段可以留空表示允许所有用户。进入稳定使用前建议只允许自己的 open_id。
